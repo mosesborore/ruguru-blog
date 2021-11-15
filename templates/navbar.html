@@ -15,7 +15,7 @@
 		<li class="nav-item"><a href="{% url 'category-list' 'content-strategy' %}">Content Strategy</a></li>
 	</ul>
 
-	<ul class="dropdown mobile-menu">
+	<ul class="dropdown mobile-menu dropdown-menu-right">
 		<a class="dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
 			aria-expanded="false" style="color: white; text-decoration: none;">Categories</a>
 		<div class="dropdown-menu" aria-labelledby="dropdownId">
@@ -30,7 +30,7 @@
 	</ul>
 
 	<div class="extra">
-		<div class="dropdown user-profile-dropdown">
+		<div class="dropdown user-profile-dropdown dropdown-menu-right">
 			<a class="dropdown-toggle" href="#" id="profile-dropdown" data-toggle="dropdown" aria-haspopup="true"
 				style="text-decoration:none;" aria-expanded="false">
 				{% if request.user.is_authenticated %}
@@ -41,7 +41,7 @@
 			</a>
 
 
-			<div class="dropdown-menu" aria-labelledby="profile-dropdown">
+			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="profile-dropdown">
 				<a class="dropdown-item" href="{% url 'profile' %}" style="color: black;">Your Profile</a>
 				{% if request.user %}
 				{% if request.user.is_authenticated %}
