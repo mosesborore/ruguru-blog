@@ -2,8 +2,6 @@ env/
 .vscode
 accounts/__pycache__/
 blog/__pycache__
-accounts
-blog
 ./ruguru/__pycache__/
 db.sqlite3
 staticfiles
