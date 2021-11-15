@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block headContent %}
+<meta name="description" content="Blogging site that provides content and information on different categories like Content Strategy, Technology/Tech, Project management,
+Life hacks, Business and Marketing">
+<link rel="stylesheet" href="{% static 'css/categories/base_cat.css' %}">
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+
+{% endblock %}
+
+{% block title %}
+Ruguru Blog
+{% endblock %}
+
+{% block content %}
+
+<section class="profile">
+	<header class="header">
+		<div class="details">
+			<img src="{{request.user.profile_image.url}}" alt="{{request.user.username}}'s profile image"
+				class="profile-pic">
+			<h1 class="heading">{{request.user}}</h1>
+
+			<div class="stats">
+				<div class="col-4">
+					<h4>20</h4>
+					<p>Reviews</p>
+				</div>
+				<div class="col-4">
+					<h4>10</h4>
+					<p>Articles read</p>
+				</div>
+
+			</div>
+		</div>
+	</header>
+</section>
+
+{% endblock %}

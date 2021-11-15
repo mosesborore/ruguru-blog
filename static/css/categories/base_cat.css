@@ -1,0 +1,132 @@
+
+--root{
+	--base-font: 'PT Sans', sans-serif;
+}
+.page-title{
+	display: flex;
+	max-width: 80rem;
+	margin-left: auto;
+	margin-right: auto;
+	justify-content: center;
+	flex-flow: row wrap;
+}
+
+.category-title{
+	display: flex;
+	width: 100%;
+	letter-spacing: .5rem;
+	line-height: 3.75rem;
+	justify-content: center;	
+}
+
+.category-title h1{
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+.page-description{
+	font-size: .875rem;
+	text-transform: uppercase;
+	color: purple;
+	font-size: 1rem;
+	font-family: var(--base-font);
+}
+
+body{
+	font-family: var(--base-font);
+	font-size: 100%;
+	font-size: 1rem;
+	background-color: #f0f4fb;
+	--webkit-font-smoothing: antialiased;
+	--moz-osx-font-smoothing: grayscale;
+}
+
+.site-container{
+	font-family: var(--base-font);
+	max-width: calc(100%-80px);
+
+}
+
+.article-container{
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(265px, 1fr)); /*1fr is 100% of the available space in each columns */
+	gap: 2rem;
+}
+
+.article-image{
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.article-image img{
+	max-width: 100%;
+	height: auto;
+	/* border-radius: 20px 20px 0 0; */
+}
+
+.article-card{
+	background: white;
+	/* border-radius: 20px; */
+	transition: 0.3s;
+}
+
+.article-card:hover{
+	box-shadow: 0 4px 20px 0 rgba(34, 68, 123, 0.2);
+	cursor: pointer;
+}
+
+.article-content{
+	padding: 2rem;
+}
+
+.article-content .card-category{
+	font-size: 0.875rem;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	font-weight: 500;
+	color: #6b82a7;
+	display: block;
+	text-decoration: none;
+}
+
+
+.article-content .card-title{
+	font-size: 1.2rem;
+	color: #22447b;
+	font-weight: 500;
+}
+
+.article-content .card-excerpt{
+	font-size: 1rem;
+	line-height: 1.5rem;
+	color: #6b82a7;
+	margin: 0;
+}
+
+
+.card-info{
+	padding: 1rem;
+}
+
+.card-info ul{
+	list-style: none;
+	font-size: .875rem;
+}
+
+.inline-list{
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	color: #6f6f70;
+	font-weight: bold;
+}
+
+.dot{
+	height: .2rem;
+	width: .2rem;
+	background-color: black;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+

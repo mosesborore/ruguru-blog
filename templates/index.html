@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block headContent %}
+<meta name="description" content="Blogging site that provides content and information on different categories like Content Strategy, Technology/Tech, Project management,
+Life hacks, Business and Marketing">
+<link rel="stylesheet" href="{% static 'css/categories/base_cat.css' %}">
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block title %}
+Ruguru Blog
+{% endblock %}
+
+
+{% block content %}
+<div class="container" style="margin-top: 1rem;">
+	<div class="site-container">
+		<div class="article-container">
+			{% for post in post_list %}
+
+			<article class="article-card">
+				<figure class="article-image">
+					<img src="{{post.picture.url}}" loading="lazy" alt="{{ post.picture_description}}">
+				</figure>
+				<div class="article-content">
+					<a href="#" class="card-category">{{post.get_category}}</a>
+					<a href="{% url 'article_details' post.slug %}">
+						<h3 class="card-title">{{post.title}}</h3>
+					</a>
+					<p class="card-excerpt">{{post.post_excerpt | safe | slice:":250" }}...</p>
+				</div>
+
+				<div class="card-info">
+					<ul class="inline-list">
+						<li>{{post.author}}</li>
+						<li class="dot"></li>
+						<li>{{post.publication_date | date:"M d, Y, G:i"}}</li>
+					</ul>
+				</div>
+			</article>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+{% endblock %}

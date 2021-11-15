@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block headContent %}
+<link rel="stylesheet" href="{% static '/css/login.css' %}">
+{% endblock %}
+
+{% block title %}
+Log in
+{% endblock %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+<section class="text-center mt-4 login-form h-100">
+	<header>
+		<h1 class=" h3 font-weight-bold">Login</h1>
+	</header>
+
+	{% if form.errors %}
+	{% for field in form %}
+	{% for error in field.errors %}
+	<div class="alert alert-danger">
+		<strong>{{ error|escape }}</strong>
+	</div>
+	{% endfor %}
+	{% endfor %}
+	{% endif %}
+	<form action="{% url 'login' %}" method="POST" class="mt-4">
+		{% csrf_token %}
+		<div class="form-group">
+			<!-- <label for="email">{{form.username.label}}</label> -->
+			<small class="form-text text-muted mb-2">Use username or email address registered to your
+				account</small>
+			{% render_field form.username class="form-control" placeholder="Enter email or username" autofocus=True %}
+		</div>
+		<div class="form-group">
+			<!-- <label for="password">{{form.password.label}}</label> -->
+			{% render_field form.password class="form-control" placeholder="Enter password" %}
+		</div>
+		<p>don't have an account? <a href="{% url 'signup' %}">create an account</a></p>
+		<button type=" submit" class="btn btn-primary btn-block mt-4">Login</button>
+	</form>
+</section>
+
+<section class="separator">
+
+</section>
+
+
+{% endblock %}

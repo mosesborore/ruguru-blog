@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block headContent %}
+<meta name="description" content="{{ category_description }}">
+<link rel="stylesheet" href="{% static 'css/categories/base_cat.css' %}">
+
+{% endblock %}
+
+<title>{% block title %}Category: {{category_title}}{% endblock %}</title>
+
+
+{% block content %}
+<div class="container">
+	<div class="page-title">
+		<div class="category-title">
+			<h1>{{category_title}}</h1>
+		</div>
+		<h3 class='page-description'>{{ category_description }}</h3>
+	</div>
+
+	<hr>
+
+	<!-- article structure -->
+	<div class="site-container">
+		<div class="article-container">
+			{% if category_post_list %}
+			{% for post in category_post_list %}
+
+			<article class="article-card">
+				<figure class="article-image">
+					<img src="{{post.picture.url}}" alt="computer cooling fun">
+				</figure>
+				<div class="article-content">
+					<a href="#" class="card-category">{{post.get_category}}</a>
+					<a href="{{post.get_absolute_url }}">
+						<h3 class="card-title">{{post.title}}</h3>
+					</a>
+					<p class="card-excerpt">{{post.post_excerpt | safe | slice:":200" }}...</p>
+				</div>
+
+				<div class="card-info">
+					<ul class="inline-list">
+						<li>{{post.author}}</li>
+						<li class="dot"></li>
+						<li>{{post.publication_date | date:"M d, Y, G:i"}}</li>
+					</ul>
+				</div>
+			</article>
+			</a>
+			{% endfor %}
+			{% else %}
+			<p>This category has no posts. You can check in later or check other categories</p>
+			{% endif %}
+		</div>
+	</div>
+
+</div>
+
+<script src="{% static 'js/addClassName.js' %}"></script>
+
+{% endblock %}
