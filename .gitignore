@@ -11,3 +11,4 @@ ruguru/__pycache__/
 accounts/migrations/__pycache__/
 blog/migrations/__pycache__/
 media/uploads/
+media/ckeditor/
