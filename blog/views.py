@@ -8,6 +8,7 @@ from .models import Post
 from .models import Category
 from .models import Comment
 
+from django.db.models import Q
 
 class IndexListView(ListView):
     queryset = Post.objects.filter(
@@ -38,20 +39,21 @@ def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     comments = Comment.objects.filter(post=post)
 
+    # filter used to select latest posts
+    filters = Q(category=post.category) & Q(status="published") & ~Q(slug=post.slug)
+
     # get 5 latest post
-    recent_post = Post.objects.filter(category = post.category).order_by('-publication_date')[:5]
+    recent_posts = (
+        Post.objects.filter(filters)
+        .order_by("-publication_date")
+        .values("title", "slug")[:5]
+    )
+
+    # top five latest post
     latest = []
 
-    for r_post in recent_post:
-        if r_post.slug == post.slug:
-            continue
-        
-        latest.append(
-            {
-                "title": r_post.title,
-                'slug': r_post.slug
-            }
-        )
+    for recent_post in recent_posts:
+        latest.append({"title": recent_post["title"], "slug": recent_post["slug"]})
 
     if request.method == 'POST':
         comment_form = CommentForm(request.POST or None)

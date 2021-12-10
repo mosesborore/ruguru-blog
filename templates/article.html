@@ -48,7 +48,7 @@
 						<h4 class="header"> Related Posts</h4>
 						<ul class="recent-list" style="list-style: none; font-size: 1.2rem;">
 							{% for latest_post in latest%}
-							<a href="{{ post.get_absolute_url }}" class="text-muted">
+							<a href="{% url 'article_details' latest_post.slug %}" class="text-muted">
 								<li>{{ latest_post.title}}</li>
 							</a>
 							<hr>
