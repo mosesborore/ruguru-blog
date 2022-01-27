@@ -62,7 +62,7 @@ def post_detail(request, slug):
             comment.post = post
             comment.save()
     comment_form = CommentForm()
-    context = {'post': post, 'comments': comments,
+    context = {'post': post, 'comments': comments, 'comments_count': comments.count(),
                "comment_form": comment_form, "latest": latest}
 
     return render(request, 'article.html', context)

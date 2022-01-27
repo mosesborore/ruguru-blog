@@ -1,139 +1,70 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
+<!-- head Section -->
 {% block headContent %}
-<link rel="stylesheet" href="{% static 'css/article.css' %}">
-<meta data-react-helmet="true" property="og:type" content="article">
-<meta data-react-helmet="true" property="og:image" content="{{post.picture.url}}">
-<meta data-react-helmet="true" property="og:title" content="{{post.title}} | Ruguru Blog">
-<meta data-react-helmet="true" property="og:url" content="">
-<meta data-react-helmet="true" name="description" content="{{ post.post_excerpt }}">
-{% endblock %}
+	<link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+	<link rel="stylesheet" href="{% static 'css/article.css' %}">
+	<title>{% block title %}{{post.title}}{% endblock %}</title>
+	
+{% endblock headContent %}
 
-<title>{% block title %}{{post.title}}{% endblock %}</title>
+<!-- end of head Section -->
 
-
+<!-- Main Section -->
 {% block content %}
-<hr style="max-width: 1000px; margin: auto;">
 
-{% load crispy_forms_tags %}
+	<section class="blog-single section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-12">
+					<div class="blog-single-main">
+						<div class="row">
+							<div class="col-12">
+								<div class="blog-detail">
+									<h2 class="blog-title">
+										{{post.title }}
+									</h2>
+									<div class="blog-meta">
+										<span class="author">
+											<a href="#"><i class="fa fa-user"></i>{{ post.author }}</a>
+											<a href="#"></a><i class="fa fa-calendar"></i>{{post.publication_date | date:"M d, Y,G:i"}}</a>
+											<a href="#"></a><i class="fa fa-comments"></i>Comments ({{ comments_count }})</a>
+										</span>
+									</div>
+									<div class="content">
+										{{ post.post_content | safe }}
+									</div>
+								</div>
+								<!--tags-->
+								<!--comments-->
 
-
-{% if post %}
-<section class="post-content" role="main">
-	<div class="content-wrapper container">
-		<div class="row">
-			<div class="col-xs-12 col-lg-8">
-				<main role="main" class="container">
-					<header>
-						<p style="letter-spacing: 2px;font-family: 'PT Sans';font-weight: 800; font-size: 1.4rem; text-transform: capitalize;
-						 margin: 10px auto 20px">
-							{{post.title }}
-						</p>
-					</header>
-					<small style="margin-bottom:10px;">
-						Published on {{post.publication_date | date:"M d, Y,G:i"}}
-					</small>
-					</header>
-					<article class="main-content" style="font-family: 'PT Sans'; line-height: 30px;">
-						{{ post.post_content | safe }}
-					</article>
-
-				</main>
-			</div>
-			<div class="col-xs-6 col-lg-4">
-				<aside>
-					<div class="recent-sidebar" style="margin-top: 10px; position: sticky; top: 0;">
-						{% if latest %}
-						<h4 class="header"> Related Posts</h4>
-						<ul class="recent-list" style="list-style: none; font-size: 1.2rem;">
-							{% for latest_post in latest%}
-							<a href="{% url 'article_details' latest_post.slug %}" class="text-muted">
-								<li>{{ latest_post.title}}</li>
-							</a>
-							<hr>
-							{% endfor %}
-						</ul>
-						{% endif %}
-					</div>
-				</aside>
-
-			</div>
-		</div>
-	</div>
-</section>
-{% endif %}
-
-<br>
-
-<section class="comments-section container">
-	<h4>COMMENTS</h4>
-	<hr style="width: 75%;">
-	{% if comments %}
-	<div class="row" id="display-comment-row">
-
-		{% for comment in comments %}
-
-		<div class="col-8" id="display-comment" style="display: flex; flex-direction: row;">
-			<div class="comment" style="display: flex; flex-direction: row;">
-				<div class="avatar"><img src="{% static 'favicons/favicon-32x32.png'%}" alt="comment default avatar">
+							</div>
+						</div>
 				</div>
-				<div class="meta" style="margin-left: 10px;">
-					<div class="name" style="display: flex; flex-direction: row; align-content: space-evenly;">
-						<div class="author" style="font-weight: bold; margin-right: 10px;">{{comment.name}}</div>
-						<div class="date">{{comment.created_date | date:"M d, Y" }}</div>
-					</div>
-					<div class="comment-body">
-						<p>{{comment.body}}</p>
-					</div>
-				</div>
-				<hr>
+			</div>
 			</div>
 		</div>
-		{% endfor %}
-	</div>
-	{% endif %}
+	</section>
 
-	<div class="separator" style="margin: 20px;"></div>
-	<div class="row">
-		<div class="col-8" id="add-comment">
-			<h4 style="font-weight: bold;">Leave a Comment</h4>
-			<p>Your email address will not be published. Required fields are marked *</p>
-			<form action="{% url 'article_details' post.slug %}" method="POST">
-				{% csrf_token %}
-				{{ comment_form | crispy }}
-				<button class="btn btn-primary">post comment</button>
-			</form>
-		</div>
-	</div>
-</section>
-<script src="{% static '/js/jquery-3.2.1.min.js' %}"></script>
-<script>
-	$(document).ready(function () {
-		// setup the all images' (in the article body section) width, height and overflow correctly
-		$("img.article-image").each(function () {
-			$(this).css({ "width": "100%", "height": "100%", "overflow": "hidden" })
-		});
+	<script src="{% static '/js/jquery-3.2.1.min.js' %}"></script>
+	<script>
+		$(document).ready(function () {
+			// setup the all images' (in the article body section) width, height and overflow correctly
+			$("img.article-image").each(function () {
+				$(this).css({ "width": "100%", "height": "100%", "overflow": "hidden" })
+			});
 
-		// change the body font
-		$("span").each(function () {
-			$(this).css({ "font-family": "PT Sans" })
-		})
+			// change the body font
+			$("span").each(function () {
+				$(this).css({ "font-family": "PT Sans" })
+			})
+		}
+		)
+	</script>
+	
+{% endblock content %}
 
-		// add the right class to 'add-comment' class based on the width of the window
-		window.addEventListener("resize", function () {
-			let addComment = document.getElementById("add-comment");
-
-			if (window.innerWidth <= 996) {
-				addComment.classList.remove("col-8")
-				addComment.classList.add("col-12");
-			}
-			else if (window.innerWidth >= 996) {
-				addComment.classList.remove("col-12");
-				addComment.classList.add("col-8");
-			}
-		}, true)
-	}
-	)
-</script>
-{% endblock %}
+<!-- End of Main Section -->
+	
