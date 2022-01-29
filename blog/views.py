@@ -38,6 +38,8 @@ class CategoryList(ListView):
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     comments = Comment.objects.filter(post=post)
+    
+    tags = post.tags.values("title", "slug")
 
     # filter used to select latest posts
     filters = Q(category=post.category) & Q(status="published") & ~Q(slug=post.slug)
@@ -45,8 +47,7 @@ def post_detail(request, slug):
     # get 5 latest post
     recent_posts = (
         Post.objects.filter(filters)
-        .order_by("-publication_date")
-        .values("title", "slug")[:5]
+        .order_by("-publication_date").values('picture', 'picture_description', 'publication_date', "title", "slug")
     )
 
     # top five latest post
@@ -62,8 +63,9 @@ def post_detail(request, slug):
             comment.post = post
             comment.save()
     comment_form = CommentForm()
+    
     context = {'post': post, 'comments': comments, 'comments_count': comments.count(),
-               "comment_form": comment_form, "latest": latest}
+               "comment_form": comment_form, "latest": recent_posts, 'tags': tags}
 
     return render(request, 'article.html', context)
 

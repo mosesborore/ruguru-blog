@@ -12,6 +12,8 @@
 
 <!-- end of head Section -->
 
+{% load crispy_forms_tags %}
+
 <!-- Main Section -->
 {% block content %}
 
@@ -29,21 +31,108 @@
 									<div class="blog-meta">
 										<span class="author">
 											<a href="#"><i class="fa fa-user"></i>{{ post.author }}</a>
-											<a href="#"></a><i class="fa fa-calendar"></i>{{post.publication_date | date:"M d, Y,G:i"}}</a>
-											<a href="#"></a><i class="fa fa-comments"></i>Comments ({{ comments_count }})</a>
+											<a href="#"><i class="fa fa-calendar"></i>{{post.publication_date | date:"M d, Y"}}</a>
+											<a href="#comments"><i class="fa fa-comments"></i>Comments ({{ comments_count }})</a>
 										</span>
+									</div>
+									<div class="image">
+										<img src="{{post.picture.url}}" loading="lazy" alt="{{ post.picture_description}}">
 									</div>
 									<div class="content">
 										{{ post.post_content | safe }}
 									</div>
 								</div>
 								<!--tags-->
+								<div class="share-social">
+									<div class="row">
+										<div class="col-12">
+											<div class="content-tags">
+												<h4>Tags:</h4>
+												<ul class="tag-inner">
+													{% if tags %}
+														{% for tag in tags %}
+															<li><a href="#">{{ tag.title }}</a></li>
+														{% endfor %}
+													{% endif %}
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
 								<!--comments-->
-
+								<div class="col-12">
+									<div class="comments" id="comments">
+										<h3 class="comment-title">Comments ({{ comments_count }})</h3>
+										<!-- Single Comment -->
+										{% for comment in comments %}
+										<div class="single-comment">
+											<img src="{% static 'favicons/favicon-32x32.png'%}" alt="comment default avatar">
+											<div class="content">
+												<h4>{{comment.name}} <span>{{comment.created_date | date:"M d, Y G:i" }}</span></h4>
+												<p>{{comment.body}}</p>
+												<div class="button">
+													<a href="#" class="btn"><i class="fa fa-reply" aria-hidden="true"></i>Reply (coming soon)</a>
+												</div>
+											</div>
+										</div>
+										{% endfor %}
+									</div>
+								</div>
 							</div>
+							<div class="col-12">
+								<div class="col-12" id="add-comment">
+									<h4 style="font-weight: bold;">Leave a Comment</h4>
+									<p>Your email address will not be published. Required fields are marked *</p>
+									<form action="{% url 'article_details' post.slug %}" method="POST">
+										{% csrf_token %}
+										{{ comment_form | crispy }}
+										<button class="btn btn-primary">post comment</button>
+									</form>
+								</div>
 						</div>
+					</div>
 				</div>
 			</div>
+			<div class="col-lg-4 col-12">
+				<div class="main-sidebar">
+					<!-- Single Widget -->
+					<div class="single-widget recent-post">
+						{% if latest %}
+							<h3 class="title">Related post</h3>
+							{% for latest_post in latest %}
+								<!--  Single Post -->
+								<div class="single-post">
+									<div class="image">
+										<img src="{{latest.picture.url}}" alt="{{latest_post.picture_description}}">
+									</div>
+									<div class="content">
+										<h5><a href="{% url 'article_details' latest_post.slug %}">{{latest_post.title}}</a></h5>
+										<ul class="comment">
+											<li><i class="fa fa-calendar" aria-hidden="true"></i>{{latest_post.publication_date | date:"M d, Y"}}</li>
+											<li><i class="fa fa-commenting-o" aria-hidden="true"></i>35</li>
+										</ul>
+									</div>
+								</div>
+								<!-- End Single Post -->
+							{% endfor %}
+						{% endif %}
+					</div>
+					<!-- Single Newsletter -->
+					<div class="single-widget newsletter">
+						<h3 class="title">Newslatter</h3>
+						<div class="letter-inner">
+							<h4>Subscribe & get news <br> latest updates.</h4>
+							<div class="form-inner">
+								<form action="" method="post">
+									<input type="email" placeholder="Enter your email">
+									<a href="#">Submit</a>
+								</form>
+								
+							</div>
+						</div>
+					</div>
+					<!--/ End Single Newsletter -->
+				</div>
 			</div>
 		</div>
 	</section>
@@ -51,15 +140,9 @@
 	<script src="{% static '/js/jquery-3.2.1.min.js' %}"></script>
 	<script>
 		$(document).ready(function () {
-			// setup the all images' (in the article body section) width, height and overflow correctly
 			$("img.article-image").each(function () {
 				$(this).css({ "width": "100%", "height": "100%", "overflow": "hidden" })
 			});
-
-			// change the body font
-			$("span").each(function () {
-				$(this).css({ "font-family": "PT Sans" })
-			})
 		}
 		)
 	</script>

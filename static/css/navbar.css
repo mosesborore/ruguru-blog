@@ -1,5 +1,5 @@
 :root{
-	--base-font:  'PT Sans', sans-serif;
+	--base-font: 'Poppins', sans-serif;
 	--text-primary: #b6b6b6;
 	--text-secondary: #ececec;
 	--bg-primary: #23232a;
@@ -27,7 +27,7 @@
 	color:  #fff;
 	letter-spacing: .1em;
 	font-size: 1.1em;
-	font-family: 'PT Sans', sans-serif;
+	font-family: 'Roboto Mono', monospace;
 }
 
 .avatar {
@@ -52,6 +52,7 @@
 	position: relative;
 	padding: 0 1.25em;
 	display: flex;
+	
 }
 
 li a{
