@@ -103,13 +103,13 @@
 								<!--  Single Post -->
 								<div class="single-post">
 									<div class="image">
-										<img src="{{latest.picture.url}}" alt="{{latest_post.picture_description}}">
+										<img src="{{latest_post.picture.url}}" alt="{{latest_post.picture_description}}">
 									</div>
 									<div class="content">
 										<h5><a href="{% url 'article_details' latest_post.slug %}">{{latest_post.title}}</a></h5>
 										<ul class="comment">
 											<li><i class="fa fa-calendar" aria-hidden="true"></i>{{latest_post.publication_date | date:"M d, Y"}}</li>
-											<li><i class="fa fa-commenting-o" aria-hidden="true"></i>35</li>
+											<li><i class="fa fa-commenting-o" aria-hidden="true"></i>{{latest_post.comments.count}}</li>
 										</ul>
 									</div>
 								</div>
@@ -123,9 +123,9 @@
 						<div class="letter-inner">
 							<h4>Subscribe & get news <br> latest updates.</h4>
 							<div class="form-inner">
-								<form action="" method="post">
-									<input type="email" placeholder="Enter your email">
-									<a href="#">Submit</a>
+								<form>
+									<input type="email" placeholder="enter your email">
+									<input type="submit" value="Submit">
 								</form>
 								
 							</div>

@@ -47,15 +47,9 @@ def post_detail(request, slug):
     # get 5 latest post
     recent_posts = (
         Post.objects.filter(filters)
-        .order_by("-publication_date").values('picture', 'picture_description', 'publication_date', "title", "slug")
+        .order_by("-publication_date")
     )
-
-    # top five latest post
-    latest = []
-
-    for recent_post in recent_posts:
-        latest.append({"title": recent_post["title"], "slug": recent_post["slug"]})
-
+    
     if request.method == 'POST':
         comment_form = CommentForm(request.POST or None)
         if comment_form.is_valid():
