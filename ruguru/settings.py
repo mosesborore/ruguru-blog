@@ -84,8 +84,12 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-# CSRF_COOKIE_SECURE =True
-# SESSION_COOKIE_SECURE = True
+# session settings
+CSRF_COOKIE_SECURE =True
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = True
+SESSION_COOKIE_AGE = 640800
 
 ROOT_URLCONF = "ruguru.urls"
 
