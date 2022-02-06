@@ -10,3 +10,4 @@ accounts/migrations/__pycache__/
 blog/migrations/__pycache__/
 media/uploads/
 media/ckeditor/
+media/__sized__/

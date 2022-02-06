@@ -1,7 +1,11 @@
 from django.db import models
-from django_resized import ResizedImageField
+from django.dispatch import receiver
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
+
+
+from versatileimagefield.fields import  VersatileImageField
+from versatileimagefield.image_warmer import VersatileImageFieldWarmer
 
 
 class AccountManager(BaseUserManager):
@@ -54,17 +58,27 @@ class Account(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    profile_image = ResizedImageField(size=[50, 50], crop=['middle', 'center'], quality=75, upload_to=get_profile_image_filepath,
-                                      blank=True, null=True, verbose_name='Profile picture', default=get_default_profile_image)
+    profile_image = VersatileImageField(
+        upload_to="user-profile-images", height_field='height', width_field='width',
+        blank=True, null=True,
+        verbose_name='Profile picture',
+        default=get_default_profile_image
+        )
+    height = models.PositiveIntegerField(
+        'Profile Image Height',
+        blank=True,
+        null=True
+    )
+    width = models.PositiveIntegerField(
+        'Profile Image Width',
+        blank=True,
+        null=True
+    )
+    
     USERNAME_FIELD = 'email'
 
     REQUIRED_FIELDS = ['username']
-
     objects = AccountManager()
-
-    def get_profile_image_filename(self):
-        """ get the name of uploaded image """
-        return str(self.profile_image)[str(self.profile_image).index(f'profile_image/{self.pk}/'):]
 
     def __str__(self):
         return self.username
@@ -74,3 +88,17 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+@receiver(models.signals.post_save, sender=Account)
+def warm_Account_profile_images(sender, instance, **kwargs):
+    profile_img_warmer = VersatileImageFieldWarmer(
+        instance_or_queryset=instance,
+        rendition_key_set="user_profile",
+        image_attr="profile_image"
+    )
+    
+    num_created, failed_to_create = profile_img_warmer.warm()
+    if num_created:
+        print("successful image warmer created")
+    if failed_to_create:
+        print("unsuccessful image warmer")
