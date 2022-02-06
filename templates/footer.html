@@ -1,5 +1,6 @@
 <!-- Footer -->
-<footer class="container-fluid text-center text-lg-start bg-light text-muted" style="margin-top: 1rem;">
+<footer class="container pt-5">
+  <hr>
   <!-- Section: Social media -->
   <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
     <!-- Left -->
@@ -25,65 +26,69 @@
   <!-- Section: Social media -->
 
   <!-- Section: Links  -->
-  <section class="">
-    <div class="container text-center text-md-start mt-5">
-      <!-- Grid row -->
-      <div class="row mt-3">
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-          <!-- Content -->
-          <h6 class="text-uppercase fw-bold mb-4">
+  <section class="row pt-5">
+    <div class="col-md-6 col-lg-3 mb-4">
+      <h4 class="text-uppercase fw-bold mb-4">
             <i class="fas fa-gem me-3"></i>Ruguru Blog
-          </h6>
-          <p>
-            We deliver
-          </p>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">
-            Useful links
-          </h6>
-          <p>
-            <a href="{% url 'category-list' 'project-management' %}" class="text-reset">Project Management</a>
-          </p>
-          <p>
-            <a href="{% url 'category-list' 'content-strategy' %}" class="text-reset">Content Strategy</a>
-          </p>
-          <p>
-            <a href="{% url 'category-list' 'life-hacks' %}" class="text-reset">Life Hacks</a>
-          </p>
-          <p>
-            <a href="{% url 'category-list' 'technology' %}" class="text-reset">Technology</a>
-          </p>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">
-            Contact
-          </h6>
-          <i class="fa fa-envelope-o" aria-hidden="true"></i>
-          aurastanleybusiness@gmail.com
-          </p>
-          <i class="fa fa-phone" aria-hidden="true"></i> + 01 234 567 88</p>
-          <p><i class="fa fa-phone" aria-hidden="true"></i> + 01 234 567 89</p>
-        </div>
-        <!-- Grid column -->
+      </h4>
+      <div class="mt-3">
+        The next-generation blog for sharing stories today!
       </div>
-      <!-- Grid row -->
+    </div>
+    <div class="col-md-5 col-lg-3 mb-4">
+      <h5 class="mb-4">
+        Navigation
+      </h5>
+      <div class="row">
+        <div class="col-6">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a href="{% url 'category-list' 'life-hacks' %}" class="nav-link pt-0">Life Hacks</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'category-list' 'project-management' %}" class="nav-link pt-0">Project Managenent</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'category-list' 'technology' %}" class="nav-link pt-0">Technology</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'category-list' 'marketing' %}" class="nav-link pt-0">Marketing</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5 col-lg-3 mb-4">
+      <h5 class="mb-4">
+        Social Media Handles
+      </h5>
+      <ul class="nav flex-column text-muted">
+        <li class="nav-item">
+          <a href="#" class="nav-link pt-0">
+            <i class="fa fa-facebook fa-fw me-2 text-facebook"></i>
+            facebook
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link pt-0">
+            <i class="fa fa-twitter fa-fw me-2 text-facebook"></i>
+            twitter
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link pt-0">
+            <i class="fa fa-instagram fa-fw me-2 text-facebook"></i>
+            instagram
+          </a>
+        </li>
+      </ul>
     </div>
   </section>
   <!-- Section: Links  -->
 
   <!-- Copyright -->
   <div class="text-center p-4">
-    © 2021 Copyright:
+    © 2022 Copyright:
     <a class="text-reset fw-bold" href="#">Ruguru Blog</a>
   </div>
   <!-- Copyright -->
