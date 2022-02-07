@@ -9,7 +9,9 @@ from .models import Category
 from .models import Comment
 
 from django.db.models import Q
-
+from  django.utils.decorators import method_decorator
+from django.views.decorators.gzip import gzip_page
+method_decorator(gzip_page)
 class IndexListView(ListView):
     queryset = Post.objects.filter(
         status='published').order_by('?')

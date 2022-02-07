@@ -9,6 +9,9 @@ from django_resized import ResizedImageField
 from .utils import unique_slug_generator
 from django.db.models.signals import pre_save
 
+from django.dispatch import receiver
+from versatileimagefield.fields import VersatileImageField
+from versatileimagefield.image_warmer import VersatileImageFieldWarmer
 
 STATUS_CHOICES = (('published', 'Published'), ('draft', 'Draft'),)
 
@@ -61,8 +64,21 @@ class Post(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, verbose_name='Category')
     publication_date = models.DateTimeField(verbose_name='Created')
-    picture = ResizedImageField(size=[800, 400], crop=['middle', 'center'], quality=75,
-                                upload_to='uploads/%Y/%m/%d', blank=True, null=True, verbose_name='Picture as thumbnail')
+    picture = VersatileImageField(
+        upload_to='blog-uploads/%Y/', height_field='height', width_field='width',
+        blank=True,
+        null=True,
+        verbose_name='Picture as thumbnail')
+    height = models.PositiveIntegerField(
+        'Profile Image Height',
+        blank=True,
+        null=True
+    )
+    width = models.PositiveIntegerField(
+        'Profile Image Width',
+        blank=True,
+        null=True
+    )
     picture_description = models.CharField(
         max_length=127, verbose_name="description of the image", null=False)
     post_excerpt = RichTextField(verbose_name="post excerpt")
@@ -115,9 +131,23 @@ pre_save.connect(slug_generator, sender=Post)
 pre_save.connect(slug_generator, sender=Category)
 pre_save.connect(slug_generator, sender=Tag)
 
-
-# class Comment(models.Model):
-#     # post
-#     # commentor_name
-#     # date_added DateTimeField(auto_now_add=True)
-#     pass
+# profile image warmer creator
+@receiver(models.signals.post_save, sender=Post)
+def warm_Account_profile_images(sender, instance, **kwargs):
+    image_instance = getattr(instance, 'picture')
+    
+    if image_instance.name == "":
+        # no file, skip the processing
+        return
+    
+    profile_img_warmer = VersatileImageFieldWarmer(
+        instance_or_queryset=instance,
+        rendition_key_set="image_blog",
+        image_attr="picture"
+    )
+    
+    num_created, failed_to_create = profile_img_warmer.warm()
+    if num_created:
+        print(f"image warmer for {instance.title} created successfully")
+    if failed_to_create:
+        print(f"image warmer for {instance.title} created unsuccessfully")

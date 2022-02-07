@@ -36,7 +36,7 @@
 										</span>
 									</div>
 									<div class="image">
-										<img src="{{post.picture.url}}" loading="lazy" alt="{{ post.picture_description}}">
+										<img src="{{post.picture.thumbnail.800x800.url}}" loading="lazy" alt="{{ post.picture_description}}">
 									</div>
 									<div class="content">
 										{{ post.post_content | safe }}
@@ -103,7 +103,7 @@
 								<!--  Single Post -->
 								<div class="single-post">
 									<div class="image">
-										<img src="{{latest_post.picture.url}}" alt="{{latest_post.picture_description}}">
+										<img src="{{latest_post.picture.thumbnail.150x150.url}}" alt="{{latest_post.picture_description}}">
 									</div>
 									<div class="content">
 										<h5><a href="{% url 'article_details' latest_post.slug %}">{{latest_post.title}}</a></h5>

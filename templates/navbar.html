@@ -34,7 +34,7 @@
 			<a class="dropdown-toggle" href="#" id="profile-dropdown" data-toggle="dropdown" aria-haspopup="true"
 				style="text-decoration:none;" aria-expanded="false">
 				{% if request.user.is_authenticated %}
-					<img src="{{request.user.profile_image.thumbnail.300x300.url}}" alt="profile image" class="avatar">
+					<img src="{{request.user.profile_image.thumbnail.150x150.url}}" alt="profile image" class="avatar">
 				{%else%}
 					<i class="fa fa-user" aria-hidden="true" style="color: rgb(112, 100, 100);"></i>
 				{% endif %}

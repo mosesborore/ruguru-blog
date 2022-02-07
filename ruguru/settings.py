@@ -244,18 +244,13 @@ VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
     "image_blog": [
         ("blog_large", 'thumbnail__800x800'),
         ('hero', 'thumbnail__600x283'),
-        ("blog_card", "thumbnail__350x174")
-    ],
-    'image_gallery': [
-        ('gallery_large', 'crop__800x450'),
-        ('gallery_square_small', 'crop__50x50'),
-        ('hero', 'crop__600x283')
-    ],
-    'primary_image_list': [
-        ('list', 'crop__400x225'),
+        ("blog_card", "thumbnail__500x300"),
+        ("blog_card_medium", "thumbnail__350x174"),
+        ("blog_card_small", "thumbnail__150x150"),
     ],
     "user_profile": [
         ('profile_large', 'thumbnail__300x300'),
+        ('profile_medium', 'thumbnail__150x150'),
         ("profile_small", "thumbnail__50x50")
     ]
 }

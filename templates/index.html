@@ -2,14 +2,12 @@
 {% load static %}
 
 {% block headContent %}
-<meta name="description" content="Blogging site that provides content and information on different categories like Content Strategy, Technology/Tech, Project management,
-Life hacks, Business and Marketing">
-<link rel="stylesheet" href="{% static 'css/categories/base_cat.css' %}">
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
+	<link rel="stylesheet" href="{% static 'css/categories/base_cat.css' %}">
+	<link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock %}
 
 {% block title %}
-Ruguru Blog
+Ruguru Blog: Home
 {% endblock %}
 
 
@@ -21,7 +19,7 @@ Ruguru Blog
 	
 				<article class="article-card">
 					<figure class="article-image">
-						<img src="{{post.picture.url}}" loading="lazy" alt="{{ post.picture_description}}">
+						<img src="{{post.picture.thumbnail.600x283.url}}" loading="lazy" alt="{{ post.picture_description}}">
 					</figure>
 					<div class="article-content">
 						<a href="#" class="card-category">{{post.get_category}}</a>
