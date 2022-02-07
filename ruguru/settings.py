@@ -242,8 +242,8 @@ VERSATILEIMAGEFIELD_SETTINGS = {
 
 VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
     "image_blog": [
-        ("blog_large", 'thumbnail__800x800'),
-        ('hero', 'thumbnail__600x283'),
+        ("blog_large", 'thumbnail__800x450'),
+        ('hero', 'thumbnail__730x280'),
         ("blog_card", "thumbnail__500x300"),
         ("blog_card_medium", "thumbnail__350x174"),
         ("blog_card_small", "thumbnail__150x150"),
