@@ -109,6 +109,18 @@
     transition: opacity .2s ease-in-out;
 }
 
+@font-face{
+    font-family: "Commissioner-Regular";
+    src: url("../fonts/Commissioner-Regular.ttf") format("truetype");
+    font: 400;
+}
+
+@font-face{
+    font-family: "Commissioner-Light";
+    src: url("../fonts/Commissioner-Light.ttf") format("truetype");
+    font: 400;
+}
+
 #messages{
     max-width: 800px;
     margin: auto;
@@ -123,5 +135,5 @@ body{
 }
 
 .main{
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Commissioner-Regular', sans-serif;
 }

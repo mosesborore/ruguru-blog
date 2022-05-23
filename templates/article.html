@@ -16,7 +16,6 @@
 
 <!-- Main Section -->
 {% block content %}
-
 	<section class="blog-single section">
 		<div class="container">
 			<div class="row">
@@ -103,7 +102,7 @@
 								<!--  Single Post -->
 								<div class="single-post">
 									<div class="image">
-										<img src="{{latest_post.picture.thumbnail.150x150.url}}" alt="{{latest_post.picture_description}}">
+										<img src="{{latest_post.picture.thumbnail.350x174.url}}" alt="{{latest_post.picture_description}}">
 									</div>
 									<div class="content">
 										<h5><a href="{% url 'article_details' latest_post.slug %}">{{latest_post.title}}</a></h5>

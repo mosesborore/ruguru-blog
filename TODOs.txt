@@ -1,0 +1,17 @@
+[] how to configure ckeditors browse url
+
+[] comment display section
+
+[] Home page grid
+
+[] NEW navbar with hamburger menu
+
+[] FIX profile page
+
+[] Add django-allAuth for login
+
+
+article
+	related posts
+
+	latest post

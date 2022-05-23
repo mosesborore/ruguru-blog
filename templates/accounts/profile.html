@@ -1,37 +1,216 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
 {% block headContent %}
-	<link rel="stylesheet" href="{% static 'css/categories/base_cat.css' %}">
-	<link rel="stylesheet" href="{% static 'css/profile.css' %}">
-{% endblock %}
+<style type="text/css">
+	.user-name, #full-name-value{
+		text-transform: capitalize;
+	}
+</style>
+	
+{% endblock headContent %}
+	
 
 {% block title %}
-	Profile
-{% endblock %}
+	My Profile
+{% endblock title %}
 
-{% block content %}
+{% load widget_tweaks %}
 
-<section class="profile">
-	<header class="header">
-		<div class="details">
-			<img src="{{request.user.profile_image.thumbnail.300x300.url}}" alt="{{request.user.username}}'s profile image"
-				class="profile-pic">
-			<h1 class="heading">{{request.user}}</h1>
+{% block main %}
 
-			<div class="stats">
-				<div class="col-4">
-					<h4>20</h4>
-					<p>Reviews</p>
+<main class="container">
+	<div class="bg-light shadow-sm rounded-3 p-4 p-md-5 mb-5">
+		<div class="d-flex align-items-start justify-content-between pb-4 mb-2">
+			<div class="d-flex align-items-start">
+				<div class="position-relative flex-shrink-0">
+					<img src="{{ request.user.avatar.url}}" class="rounded-circle" width="100"
+						alt="{{ request.user.username}}">
 				</div>
-				<div class="col-4">
-					<h4>10</h4>
-					<p>Articles read</p>
+				<div class="p-3 p-sm-4">
+					<h3 class="h5"> <span class="me-1">Welcome,</span> <span class="user-name">{{ request.user.username}}</span></h3>
+					<ul class="list-unstyled fs-sm mb-0">
+						<li class="d-flex text-nav text-break">
+							<img src="{% static 'icons/mail.svg'%}" alt="mial icon" class="mt-2 me-2">
+							{% if request.user.email %}
+								<span class="mt-3 me-2">{{ request.user.email}} </span>
+							{% else %}
+								<span  class="mt-3 me-2">Not specified </span>
+							{% endif %}
+							
+						</li>
+					</ul>
 				</div>
-
 			</div>
 		</div>
-	</header>
-</section>
+		<form action="{% url 'account:profile' %}" method="POST">
+			{% csrf_token %}
+			<!-- Authorization data -->
+			<div class="row pt-4 mt-4">
+				<div class="col-lg-3">
+					<h2 class="h4"> Authorization Info</h2>
+				</div>
+				<div class="col-lg-9">
+					<div class="border rounded-3 p-3" id="auth-info">
+						<!-- USERNAME -->
+						<div class="border-bottom pb-3 mb-3">
+							<div class="d-flex align-items-center justify-content-between">
+								<div class="pe-2">
+									<label for="username" class="form-label fw-bold">
+										Username
+									</label>
+									<div id="username-value">{{ request.user.username}}</div>
+								</div>
+								<div class="me-n3" data-bs-toggle="tooltip" title="Edit" data-bs-placement="top"
+									data-bs-original-title="Edit" aria-label="title">
+									<a class="nav-link py-0 collapsed" href="#username-collapse"
+										data-bs-toggle="collapse" data-bs-target="#username-collapse"
+										aria-expanded="false">
+										<img src="{% static 'icons/edit.svg' %}" alt="edit icon">
+									</a>
+								</div>
+							</div>
+							<div class="collapse" id="username-collapse" data-bs-parent="#auth-info">
+								<input type="text" id="username" class="form-control mt-3" data-bs-binded-element="#username-value" data-bs-unset-value="Not specified">
+							</div>
+						</div>
+						<!-- Password -->
+						<div class="">
+							<div class="d-flex align-items-center justify-content-between">
+								<div class="pe-2">
+									<label for="password" class="form-label fw-bold">
+										Password
+									</label>
+									<div id="password-value">********</div>
+								</div>
+								<div class="me-n3" data-bs-toggle="tooltip" title="Edit" data-bs-placement="top"
+									data-bs-original-title="Edit" aria-label="title">
+									<a class="nav-link py-0 collapsed" href="#password-collapse"
+										data-bs-toggle="collapse" data-bs-target="#password-collapse"
+										aria-expanded="false">
+										<img src="{% static 'icons/edit.svg' %}" alt="edit icon">
+									</a>
+								</div>
+							</div>
+							<div class="collapse" id="password-collapse" data-bs-parent="#auth-info">
+								<div class="row gx-3 align-items-center my-3">
+									<label for="account-new-password"
+										class="col-sm-4 col-md-3 col-form-label fw-bold">New
+										password</label>
+									<div class="col-sm-8 col-md-9">
+										<div class="password-toggle" style="position: relative;">
+											<input id="account-new-password" type="password" class="form-control mt-3"
+												placeholder="Enter new password">
+										</div>
+									</div>
+								</div>
+								<div class="row gx-3 align-items-center my-3">
+									<label for="confirm-account-new-password"
+										class="col-sm-4 col-md-3 col-form-label fw-bold">Confirm new
+										password</label>
+									<div class="col-sm-8 col-md-9">
+										<div class="password-toggle" style="position: relative;">
+											<input id="confirm-account-new-password" type="password"
+												class="form-control mt-3" placeholder="Confirm new password" value="">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Personal information -->
+			<div class="row pt-4 mt-2">
+				<div class="col-lg-3">
+					<h2 class="h4">Personal details</h2>
+				</div>
+				<div class="col-lg-9">
+					<div class="border rounded-3 p-3" id="personal-info">
+						<div class="border-bottom pb-3 mb-3">
+							<!-- Full name -->
+							<div class="d-flex align-items-center justify-content-between">
+								<div class="pe-2">
+									<label class="form-label fw-bold">
+										Full Name
+									</label>
+									<div id="full-name-value">{{request.user.full_name}}</div>
+								</div>
+								<div class="me-n3" data-bs-toggle="tooltip" title="Edit" data-bs-placement="top"
+									data-bs-original-title="Edit" aria-label="title">
+									<a class="nav-link py-0 collapsed" href="#full-name-collapse"
+										data-bs-toggle="collapse" data-bs-target="#full-name-collapse"
+										aria-expanded="false">
+										<img src="{% static 'icons/edit.svg' %}" alt="edit icon">
+									</a>
+								</div>
+							</div>
+
+							<div class="collapse" id="full-name-collapse" data-bs-parent="#personal-info">
+								<div class="row gx-3 align-items-center my-3">
+									<label for="update-first-name"
+										class="col-sm-4 col-md-3 col-form-label fw-bold">First
+										Name</label>
+									<div class="col-sm-8 col-md-9">
+										<div class="first-name-toggle" style="position: relative;">
+											<input class="form-control mt-3" placeholder="update your first name" id="update-first-name">
+										</div>
+									</div>
+								</div>
+								<div class="row gx-3 align-items-center my-3">
+									<label for="update-last-name" class="col-sm-4 col-md-3 col-form-label fw-bold">Last
+										Name</label>
+									<div class="col-sm-8 col-md-9">
+										<div class="last-name-toggle" style="position: relative;">
+											<input class="form-control mt-3" placeholder="update your last name" id="update-last-name">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<!-- Email Address -->
+						<div class="d-flex align-items-center justify-content-between">
+							<div class="pe-2">
+								<label for="phone-number" class="form-label fw-bold">
+									Phone Number
+								</label>
+								<div id="email-value">{{request.user.email}}</div>
+							</div>
+							<div class="me-n3" data-bs-toggle="tooltip" title="Edit" data-bs-placement="top"
+								data-bs-original-title="Edit" aria-label="title">
+								<a class="nav-link py-0 collapsed" href="#email-collapse"
+									data-bs-toggle="collapse" data-bs-target="#email-collapse"
+									aria-expanded="false">
+									<img src="{% static 'icons/edit.svg' %}" alt="edit icon">
+								</a>
+							</div>
+						</div>
+						<div class="collapse" id="phone-number-collapse" data-bs-parent="#personal-info">
+							<input id="phone-number" class="form-control mt-3" data-bs-binded-element="#email-value" data-bs-unset-value="Not specified">
+						</div>
+					</div>
+				</div>
+
+				<!-- action buttons -->
+				<div class="row pt-4 mt-2">
+					<div class="col-lg-9 offset-lg-3">
+						<div class="d-flex align-items-center justify-content-between">
+							<button class="btn btn-primary rounded-pill px-3 px-sm-4" type="submit">Save
+								changes</button>
+							<button class="btn btn-link btn-sm px-0" type="button"
+								style="text-decoration: none; color:red;">
+								<img src="{% static 'icons/trash.svg' %}" class="me-2" alt="trash icon">
+								Delete account
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+</main>
 
 {% endblock %}

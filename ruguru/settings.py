@@ -1,11 +1,9 @@
-from pathlib import Path
-import warnings
 import os
-
+import warnings
+from pathlib import Path
 
 import dj_database_url
 from django.core.management.utils import get_random_secret_key
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -59,7 +57,7 @@ INSTALLED_APPS = [
     "widget_tweaks",
     "ckeditor",
     "ckeditor_uploader",
-    'versatileimagefield',
+    "versatileimagefield",
 ]
 
 MIDDLEWARE = [
@@ -74,7 +72,7 @@ MIDDLEWARE = [
 ]
 
 # session settings
-CSRF_COOKIE_SECURE =True
+CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = "strict"
@@ -106,9 +104,9 @@ WSGI_APPLICATION = "ruguru.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASES = {}
-if os.environ.get("DATABASE_URL"):
+if os.environ.get("DATABASE_URL_RUGURU"):
     DATABASES["default"] = dj_database_url.config(
-        default=os.environ.get("DATABASE_URL")
+        default=os.environ.get("DATABASE_URL_RUGURU")
     )
 else:
     DATABASES["default"] = {
@@ -153,14 +151,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-# STATIC_URL is the URL location of static files located in STATIC_ROOT
-# STATICFILES_DIRS tells Django where to look for static files in a Django project, such as a top-level static folder
-# STATIC_ROOT is the folder location of static files when collecstatic is run
-# STATICFILES_STORAGE is the file storage engine used when collecting static files with the collecstatic command.
-
 STATIC_URL = "/static/"
 STATICFILES_DIRS = (str(BASE_DIR.joinpath("static")),)
 STATIC_ROOT = str(BASE_DIR.joinpath("staticfiles"))
@@ -177,7 +167,7 @@ MEDIA_ROOT = str(BASE_DIR.joinpath("media"))
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-LOGIN_URL = "accounts/login/?next=/accounts/profile"
+LOGIN_URL = "accounts/login/"
 
 
 # 3rd PARTY CONFIGURATION
@@ -242,14 +232,14 @@ VERSATILEIMAGEFIELD_SETTINGS = {
 
 VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
     "image_blog": [
-        ("blog_large", 'thumbnail__1080x900'),
-        ('hero', 'thumbnail__730x280'),
+        ("blog_large", "thumbnail__1080x900"),
+        ("hero", "thumbnail__730x280"),
         ("blog_card", "thumbnail__1045x588"),
         ("blog_card_medium", "thumbnail__350x174"),
     ],
     "user_profile": [
-        ('profile_large', 'thumbnail__300x300'),
-        ('profile_medium', 'thumbnail__150x150'),
-        ("profile_small", "thumbnail__50x50")
-    ]
+        ("profile_large", "thumbnail__300x300"),
+        ("profile_medium", "thumbnail__150x150"),
+        ("profile_small", "thumbnail__50x50"),
+    ],
 }

@@ -1,5 +1,5 @@
 :root{
-	--base-font: 'Poppins', sans-serif;
+	--base-font: 'Commissioner-Regular', sans-serif;
 	--text-primary: #b6b6b6;
 	--text-secondary: #ececec;
 	--bg-primary: #23232a;
@@ -26,8 +26,8 @@
 	text-decoration: none;
 	color:  #fff;
 	letter-spacing: .1em;
-	font-size: 1.1em;
-	font-family: 'Roboto Mono', monospace;
+	font-size: 1em;
+	font-family: 'Commissioner-Light', monospace;
 }
 
 .avatar {

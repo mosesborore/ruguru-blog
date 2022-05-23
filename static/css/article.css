@@ -1,5 +1,5 @@
 body{
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Commissioner-Light', sans-serif;
 }
 /* Blog Single CSS */
 .blog-single{
@@ -27,7 +27,7 @@ body{
 	font-weight: 600;
 	text-transform: capitalize;
 	margin: 40px 0 15px 0;
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Commissioner-Regular', sans-serif;
 }
 .blog-single .blog-meta {
 	margin-bottom: 0;
@@ -72,7 +72,7 @@ body{
 .blog-single .content p {
 	margin-bottom: 25px;
 	line-height: 30px;
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Commissioner-Regular', sans-serif;
 }
 .blog-single .content p:last-child{
 	margin:0;
@@ -210,7 +210,7 @@ body{
 }
 
 .main-sidebar{
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Commissioner-Regular', sans-serif;
 }
 
 /* Blog Sidebar */
@@ -291,9 +291,6 @@ body{
 .main-sidebar .categor-list {
 	margin-top: 15px;
 }
-.main-sidebar .categor-list li{
-	
-}
 .main-sidebar .categor-list li {
 	margin-bottom: 10px;
 }
@@ -326,7 +323,6 @@ body{
 	visibility:visible;
 }
 /* Recent Post */
-.main-sidebar .recent-post{}
 .main-sidebar .single-post {
 	position: relative;
 	border-bottom: 1px solid #ddd;
@@ -336,9 +332,6 @@ body{
 .main-sidebar .single-post:last-child{
 	padding-bottom:0px;
 	border:none;
-}
-.main-sidebar .single-post .image {
-	
 }
 .main-sidebar .single-post .image img{
 	float: left;
@@ -365,7 +358,6 @@ body{
 .main-sidebar .single-post .content h5 a:hover{
 	color:#F7941D;
 }
-.main-sidebar .single-post .content .comment{}
 .main-sidebar .single-post .content .comment li{
 	color:#888;
 	display:inline-block;
@@ -381,7 +373,7 @@ body{
 	margin-right:5px;
 }
 /* Blog Tags */
-.main-sidebar .side-tags{}
+
 .main-sidebar .side-tags .tag{
 	margin-top:40px;
 }
@@ -405,9 +397,6 @@ body{
 	border-color:transparent;
 }
 /* Blog Newslatter CSS */
-.main-sidebar .newsletter{
-	
-}
 .main-sidebar .newsletter .letter-inner {
 	position:relative;
 	padding: 35px 30px;
